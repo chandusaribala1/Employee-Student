@@ -1,0 +1,6 @@
+:host{display:grid;min-height:100vh;place-items:center;background:#f6f8fc;text-align:center}
+main{padding:30px}
+.code{font-size:68px;font-weight:800;color:#4563d8}
+h1{color:#1d2a42}
+p{color:#78869c}
+a{display:inline-block;margin-top:14px;background:#4563d8;color:white;border-radius:8px;padding:11px 16px;text-decoration:none}

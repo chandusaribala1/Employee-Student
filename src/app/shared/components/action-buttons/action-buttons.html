@@ -1,0 +1,5 @@
+<div class="actions">
+  <button type="button" (click)="view.emit(itemId)" [attr.aria-label]="'View record ' + itemId">View</button>
+  <button type="button" (click)="edit.emit(itemId)" [attr.aria-label]="'Edit record ' + itemId">Edit</button>
+  <button type="button" class="danger" (click)="remove.emit(itemId)" [attr.aria-label]="'Delete record ' + itemId">Delete</button>
+</div>

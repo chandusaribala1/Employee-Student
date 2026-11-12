@@ -1,0 +1,25 @@
+
+    <a class="back" [routerLink]="listLink">← Student list</a>
+    <h1>{{editing ? 'Edit student' : 'Add student'}}</h1><p class="muted">Enter the student's name, course, year, and employee assignment.</p>
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <section class="form-section">
+        <label>Name<input formControlName="name" autocomplete="name"></label>
+        @if(form.controls.name.touched && form.controls.name.invalid){<small class="field-error">Enter a name with at least 2 characters.</small>}
+        <label>Course<select formControlName="course"><option value="">Choose a course</option>@for(option of courseOptions;track option){<option [value]="option">{{option}}</option>}</select></label>
+        @if(form.controls.course.touched && form.controls.course.invalid){<small class="field-error">Choose a course.</small>}
+        <label>Year<input type="number" min="1" max="8" formControlName="year"></label>
+        @if(form.controls.year.touched && form.controls.year.invalid){<small class="field-error">Enter a year from 1 to 8.</small>}
+        @if(role === 'ADMIN'){
+          <label>Assigned to
+            <select formControlName="employeeId"><option value="">Choose an employee</option>@for(employee of eligibleEmployees;track employee.id){<option [value]="employee.id">{{employee.name}} · {{employee.designation}}</option>}</select>
+          </label>
+          @if(form.controls.employeeId.touched && form.controls.employeeId.invalid){<small class="field-error">Choose an employee for this student.</small>}
+          @if(employeeLoading){<small class="muted">Loading employees…</small>}
+          @if(employeeError){<small class="field-error">{{employeeError}}</small>}
+        } @else if(role === 'EMPLOYEE') {
+          <label>Assigned to<input [value]="currentEmployee?.name ?? 'Loading employee…'" readonly></label>
+        }
+      </section>
+      @if(error){<p class="form-error" role="alert">{{error}}</p>}
+      <button class="primary" type="submit" [disabled]="saving">{{saving ? 'Saving…' : editing ? 'Save changes' : 'Save student'}}</button>
+    </form>

@@ -1,0 +1,34 @@
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+button {
+  padding: 7px 9px;
+  color: #3c57c2;
+  background: #edf1ff;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+}
+
+button:hover {
+  background: #e1e8ff;
+}
+
+button.danger {
+  color: #ba3428;
+  background: #fff0ee;
+}
+
+button.danger:hover {
+  background: #ffe2de;
+}
+
+button:focus-visible {
+  outline: 3px solid #91a7ff;
+  outline-offset: 2px;
+}

@@ -1,0 +1,47 @@
+<header class="topbar">
+  <div class="brand-area">
+    <a class="brand" [routerLink]="homeLink" aria-label="Northstar Management dashboard">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M12 2.5 14.9 9.1 21.5 12l-6.6 2.9L12 21.5l-2.9-6.6L2.5 12l6.6-2.9L12 2.5Z" fill="currentColor" />
+          <circle cx="12" cy="12" r="2.1" fill="white" />
+        </svg>
+      </span>
+      <span class="brand-copy">
+        <span class="brand-name">Northstar</span>
+        <span class="brand-subtitle">Management</span>
+      </span>
+    </a>
+
+    <span class="brand-divider" aria-hidden="true"></span>
+    <span class="workspace-label">Workspace</span>
+  </div>
+
+  @if (auth.currentUser(); as user) {
+    <div class="account">
+      <div class="account-copy">
+        <span class="account-name">{{ user.name }}</span>
+        <span class="account-role">
+          @switch (user.role) {
+            @case ('ADMIN') { Administrator }
+            @case ('EMPLOYEE') { Employee }
+            @case ('STUDENT') { Student }
+          }
+        </span>
+      </div>
+
+      <span class="avatar" aria-hidden="true">
+        {{ user.name.trim().charAt(0).toUpperCase() || '?' }}
+      </span>
+
+      <span class="account-divider" aria-hidden="true"></span>
+
+      <button class="sign-out" type="button" (click)="logout()" aria-label="Sign out">
+        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M8.25 3.5H4.5a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h3.75M12 13.5l3.5-3.5L12 6.5M15.25 10H7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span>Sign out</span>
+      </button>
+    </div>
+  }
+</header>

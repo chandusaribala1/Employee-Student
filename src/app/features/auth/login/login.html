@@ -1,0 +1,5 @@
+
+<div class="auth-page"><section class="auth-card"><div class="eyebrow">NORTHSTAR MANAGEMENT</div><h1>Welcome back</h1><p class="muted">Sign in to continue to your workspace.</p>
+<form [formGroup]="form" (ngSubmit)="login()"><label>Name<input formControlName="name" placeholder="Your name"></label><label>Password<input type="password" formControlName="password" placeholder="Password"></label><fieldset><legend>Sign in as</legend><label class="radio"><input type="radio" formControlName="role" value="ADMIN"> Admin</label><label class="radio"><input type="radio" formControlName="role" value="EMPLOYEE"> Employee</label><label class="radio"><input type="radio" formControlName="role" value="STUDENT"> Student</label></fieldset>
+@if(error){<p class="error">{{error}}</p>}<button class="primary full" [disabled]="form.invalid || loading">{{loading ? 'Signing in…' : 'Sign in'}}</button></form><p class="foot">New here? <a routerLink="/register">Create an account</a></p>
+<p class="hint">Demo: Admin User / Admin123 · Chandana / Employee123 · Priya / Student123</p></section></div>

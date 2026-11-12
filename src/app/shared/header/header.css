@@ -1,0 +1,223 @@
+:host {
+  display: block;
+  position: relative;
+  z-index: 2;
+}
+
+.topbar {
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 0 30px;
+  background: #fff;
+  border-bottom: 1px solid #e8edf4;
+}
+
+.brand-area,
+.brand,
+.brand-copy,
+.account,
+.sign-out {
+  display: flex;
+  align-items: center;
+}
+
+.brand-area {
+  min-width: 0;
+  gap: 20px;
+}
+
+.brand {
+  flex: 0 0 auto;
+  gap: 11px;
+  color: #17233a;
+  text-decoration: none;
+}
+
+.brand-mark {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  color: #fff;
+  background: #405fd1;
+  border-radius: 11px;
+  box-shadow: 0 4px 10px #405fd126;
+}
+
+.brand-mark svg {
+  width: 21px;
+  height: 21px;
+}
+
+.brand-copy {
+  align-items: baseline;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.brand-name {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -.35px;
+}
+
+.brand-subtitle {
+  color: #7b879a;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.brand-divider,
+.account-divider {
+  width: 1px;
+  height: 28px;
+  background: #e8edf4;
+}
+
+.workspace-label {
+  color: #728097;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .2px;
+}
+
+.account {
+  flex: 0 0 auto;
+  gap: 14px;
+}
+
+.account-copy {
+  display: grid;
+  gap: 3px;
+  text-align: right;
+}
+
+.account-name {
+  max-width: 190px;
+  overflow: hidden;
+  color: #26344d;
+  font-size: 13px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.account-role {
+  color: #7b879a;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.avatar {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  place-items: center;
+  color: #3858cf;
+  background: #e7edff;
+  border: 1px solid #dce5ff;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.sign-out {
+  justify-content: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 0 11px;
+  color: #526078;
+  background: #f5f7fa;
+  border: 1px solid #e9edf3;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 650;
+  transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease;
+}
+
+.sign-out svg {
+  width: 17px;
+  height: 17px;
+}
+
+.sign-out:hover {
+  color: #304ebd;
+  background: #eff3ff;
+  border-color: #dce5ff;
+}
+
+.brand:focus-visible,
+.sign-out:focus-visible {
+  outline: 3px solid #91a7ff;
+  outline-offset: 3px;
+}
+
+@media (max-width: 680px) {
+  .topbar {
+    gap: 12px;
+    padding: 0 18px;
+  }
+
+  .brand-area {
+    gap: 12px;
+  }
+
+  .workspace-label,
+  .brand-divider {
+    display: none;
+  }
+
+  .account {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 460px) {
+  .topbar {
+    padding: 0 12px;
+  }
+
+  .brand {
+    gap: 8px;
+  }
+
+  .brand-mark {
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+  }
+
+  .brand-copy {
+    display: grid;
+    gap: 0;
+  }
+
+  .brand-name {
+    font-size: 14px;
+  }
+
+  .brand-subtitle {
+    font-size: 10px;
+  }
+
+  .account-copy,
+  .account-divider {
+    display: none;
+  }
+
+  .sign-out {
+    gap: 5px;
+    padding: 0 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sign-out {
+    transition: none;
+  }
+}

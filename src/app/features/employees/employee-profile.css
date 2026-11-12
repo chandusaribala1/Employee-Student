@@ -1,0 +1,9 @@
+.back{color:#5065c9;text-decoration:none;font-weight:600;font-size:13px}
+.profile{margin-top:20px;padding:28px;background:white;border:1px solid #e6ebf2;border-radius:14px;max-width:650px}
+.eyebrow{font-size:10px;letter-spacing:1.2px;color:#5268cf;font-weight:bold}
+h1{color:#1d2a42;margin-bottom:0}
+.muted{color:#7b8799}
+.details{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:24px;margin-top:28px}
+.details small,.details b{display:block}
+.details small{font-size:10px;color:#8893a5;margin-bottom:7px}
+.details b{font-size:14px;color:#27354e}

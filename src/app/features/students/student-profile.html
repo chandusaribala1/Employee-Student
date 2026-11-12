@@ -1,0 +1,31 @@
+
+    <a class="back" [routerLink]="backLink">← {{own ? 'Dashboard' : 'Student list'}}</a>
+    @if(student){
+      <header class="profile-heading"><p class="eyebrow">{{own ? 'MY PROFILE' : 'STUDENT PROFILE'}}</p><h1>{{student.name}}</h1><p class="muted">{{student.course}} · Year {{student.year}}</p></header>
+      <div class="profile-grid">
+        <section class="profile-card"><p class="section-label">PERSONAL INFORMATION</p>
+          <dl><div><dt>Full name</dt><dd>{{student.name}}</dd></div><div><dt>Email</dt><dd>{{student.email}}</dd></div>
+            <div><dt>Phone</dt><dd>{{student.phone || 'Not provided'}}</dd></div><div><dt>Address</dt><dd>{{student.address || 'Not provided'}}</dd></div></dl>
+          @if(own && profileSaved){<p class="success" role="status">Profile updated.</p>}
+          @if(own && !editingPersonal){<button class="secondary" type="button" (click)="editPersonalInfo()">Edit my details</button>}
+          @if(own && editingPersonal){
+            <form [formGroup]="personalForm" (ngSubmit)="savePersonalInfo()">
+              <label>Phone number<input type="text" inputmode="numeric" maxlength="15" autocomplete="tel" formControlName="phone" (input)="keepPhoneDigits($event)"></label>
+              @if(personalForm.controls.phone.touched && personalForm.controls.phone.invalid){<small class="field-error">Use digits only (up to 15 digits).</small>}
+              <label>Address<textarea rows="2" autocomplete="street-address" formControlName="address"></textarea></label>
+              <label>Skills <small>(comma separated)</small><input formControlName="skills" placeholder="Java, SQL, Communication"></label>
+              @if(profileError){<p class="error" role="alert">{{profileError}}</p>}
+              <div class="form-actions"><button class="primary" type="submit" [disabled]="savingProfile">{{savingProfile ? 'Saving…' : 'Save profile'}}</button><button class="secondary" type="button" (click)="cancelPersonalEdit()">Cancel</button></div>
+            </form>
+          }
+        </section>
+        <section class="profile-card"><p class="section-label">ACADEMIC INFORMATION</p>
+          <dl><div><dt>Course</dt><dd>{{student.course}}</dd></div><div><dt>Year</dt><dd>{{student.year}}</dd></div>
+            <div><dt>Assigned employee</dt><dd>{{assignedEmployeeName || 'Not assigned'}}</dd></div></dl>
+        </section>
+        <section class="profile-card skills-card"><p class="section-label">SKILLS</p>
+          @if(student.skills?.length){<div class="skills">@for(skill of student.skills;track skill){<span>{{skill}}</span>}</div>}
+          @else{<p class="muted">No skills added yet.</p>}
+        </section>
+      </div>
+    } @else { <p class="notice">Profile is unavailable.</p> }

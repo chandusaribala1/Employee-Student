@@ -1,0 +1,133 @@
+<section class="dashboard">
+  <header class="page-heading">
+    <div>
+      <p class="eyebrow">OVERVIEW</p>
+      <h1>Admin dashboard</h1>
+      <p class="muted">A quick view of your employee and student records.</p>
+    </div>
+    <span class="access-pill"><span aria-hidden="true">●</span> Admin workspace</span>
+  </header>
+
+  <div class="stats" aria-label="Organization summary">
+    <a class="stat-card" routerLink="/admin/employees/list">
+      <span class="stat-icon employee-icon" aria-hidden="true">E</span>
+      <span class="stat-copy"><small>EMPLOYEES</small><strong>{{ employeeLoading ? '—' : employees.length }}</strong><span>Open employee directory →</span></span>
+    </a>
+    <a class="stat-card" routerLink="/admin/students/list">
+      <span class="stat-icon student-icon" aria-hidden="true">S</span>
+      <span class="stat-copy"><small>STUDENTS</small><strong>{{ studentLoading ? '—' : students.length }}</strong><span>Open student directory →</span></span>
+    </a>
+    <article class="stat-card role-card">
+      <span class="stat-icon role-icon" aria-hidden="true">✓</span>
+      <span class="stat-copy"><small>ACCESS ROLES</small><strong>3</strong><span>Admin, employee, student</span></span>
+    </article>
+  </div>
+
+  <div class="directory-grid">
+    <section class="directory-card" aria-labelledby="employee-preview-title">
+      <div class="card-heading">
+        <div>
+          <h2 id="employee-preview-title">Employees</h2>
+          <p class="muted">Search and filter the directory.</p>
+        </div>
+        <a class="text-link" routerLink="/admin/employees/list">Manage all <span aria-hidden="true">→</span></a>
+      </div>
+
+      <div class="filters">
+        <label class="search-field">
+          <span class="visually-hidden">Search employees by name</span>
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="8.8" cy="8.8" r="5.8" stroke="currentColor" stroke-width="1.5"/><path d="m13.2 13.2 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <input type="search" placeholder="Search by name" [value]="employeeSearch" (input)="employeeSearch = $any($event.target).value">
+        </label>
+        <label>
+          <span class="visually-hidden">Filter employees by department</span>
+          <select [value]="departmentFilter" (change)="departmentFilter = $any($event.target).value">
+            <option value="">All departments</option>
+            @for (department of departments; track department) {
+              <option [value]="department">{{ department }}</option>
+            }
+          </select>
+        </label>
+      </div>
+
+      @if (employeeLoading) {
+        <p class="state-message" role="status">Loading employees…</p>
+      } @else if (employeeError) {
+        <p class="state-message error" role="alert">{{ employeeError }}</p>
+      } @else {
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Name</th><th>Department</th><th>Designation</th><th>Students</th></tr></thead>
+            <tbody>
+              @for (employee of employees | filterBy: employeeSearch : 'name' : 'department' : departmentFilter; track employee.id) {
+                <tr>
+                  <td><strong>{{ employee.name }}</strong><small>{{ employee.email }}</small></td>
+                  <td>{{ employee.department }}</td>
+                  <td>{{ employee.designation }}</td>
+                  <td>{{ studentsAssignedTo(employee) }}</td>
+                </tr>
+              } @empty {
+                <tr><td class="empty" colspan="4">No employees match these filters.</td></tr>
+              }
+            </tbody>
+          </table>
+        </div>
+        @let filteredEmployees = employees | filterBy: employeeSearch : 'name' : 'department' : departmentFilter;
+        <p class="result-count">Showing {{ filteredEmployees.length }} of {{ employees.length }} employees</p>
+      }
+    </section>
+
+    <section class="directory-card" aria-labelledby="student-preview-title">
+      <div class="card-heading">
+        <div>
+          <h2 id="student-preview-title">Students</h2>
+          <p class="muted">Search and filter the directory.</p>
+        </div>
+        <a class="text-link" routerLink="/admin/students/list">Manage all <span aria-hidden="true">→</span></a>
+      </div>
+
+      <div class="filters">
+        <label class="search-field">
+          <span class="visually-hidden">Search students by name</span>
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="8.8" cy="8.8" r="5.8" stroke="currentColor" stroke-width="1.5"/><path d="m13.2 13.2 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <input type="search" placeholder="Search by name" [value]="studentSearch" (input)="studentSearch = $any($event.target).value">
+        </label>
+        <label>
+          <span class="visually-hidden">Filter students by course</span>
+          <select [value]="courseFilter" (change)="courseFilter = $any($event.target).value">
+            <option value="">All courses</option>
+            @for (course of courses; track course) {
+              <option [value]="course">{{ course }}</option>
+            }
+          </select>
+        </label>
+      </div>
+
+      @if (studentLoading) {
+        <p class="state-message" role="status">Loading students…</p>
+      } @else if (studentError) {
+        <p class="state-message error" role="alert">{{ studentError }}</p>
+      } @else {
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Name</th><th>Course</th><th>Year</th><th>Assigned employee</th></tr></thead>
+            <tbody>
+              @for (student of students | filterBy: studentSearch : 'name' : 'course' : courseFilter; track student.id) {
+                <tr>
+                  <td><strong>{{ student.name }}</strong><small>{{ student.email }}</small></td>
+                  <td>{{ student.course }}</td>
+                  <td>{{ student.year }}</td>
+                  <td>{{ assignedEmployeeName(student) }}</td>
+                </tr>
+              } @empty {
+                <tr><td class="empty" colspan="4">No students match these filters.</td></tr>
+              }
+            </tbody>
+          </table>
+        </div>
+        @let filteredStudents = students | filterBy: studentSearch : 'name' : 'course' : courseFilter;
+        <p class="result-count">Showing {{ filteredStudents.length }} of {{ students.length }} students</p>
+      }
+    </section>
+  </div>
+</section>

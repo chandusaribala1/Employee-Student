@@ -1,0 +1,22 @@
+
+    <div class="heading">
+      <div><p class="eyebrow">PEOPLE</p><h1>Students</h1><p class="muted">Student records and course details.</p></div>
+      <a class="primary" routerLink="../add">＋ Add student</a>
+    </div>
+    <div class="filters">
+      <input aria-label="Search students by name" placeholder="Search by name" [value]="search" (input)="search=$any($event.target).value">
+      <select aria-label="Filter students by course" [value]="course" (change)="setCourse($any($event.target).value)">
+        <option value="">All courses</option>@for(option of courses;track option){<option [value]="option">{{option}}</option>}
+      </select>
+    </div>
+    @if(success){<p class="success" role="status">{{success}}</p>}
+    @if(loading){<p class="notice" role="status">Loading students…</p>}
+    @else if(error){<p class="error" role="alert">{{error}}</p>}
+    @else {
+      <div class="table-wrap"><table><thead><tr><th>ID</th><th>Student</th><th>Assigned employee</th><th>Course</th><th>Year</th><th>Phone</th><th>Actions</th></tr></thead>
+        <tbody>@for(person of rows | filterBy: search : 'name' : 'course' : course;track person.id){
+          <tr><td>#{{person.id}}</td><td><strong>{{person.name}}</strong><small>{{person.email}}</small></td><td>{{assignedEmployeeName(person)}}</td><td>{{person.course}}</td><td>{{person.year}}</td><td>{{person.phone}}</td>
+            <td><app-action-buttons [itemId]="person.id" (view)="view($event)" (edit)="edit($event)" (delete)="remove($event)"/></td></tr>
+        }@empty{<tr><td colspan="7" class="empty">No students match your search or your assignment.</td></tr>}</tbody>
+      </table></div>
+    }

@@ -1,0 +1,17 @@
+:host{display:block}
+.heading{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.eyebrow{font-size:10px;letter-spacing:1.3px;color:#5268cf;font-weight:bold}
+h1{color:#1d2a42;margin:4px 0}
+.muted{color:#7b8799;font-size:14px}
+.primary{background:#4563d8;color:white;text-decoration:none;border:0;border-radius:8px;padding:11px 14px;font-size:13px}
+.filters{display:flex;gap:10px;margin:24px 0}
+.filters input,.filters select{padding:10px;border:1px solid #dce2ed;border-radius:7px;background:white}
+.table-wrap{overflow:auto;background:white;border:1px solid #e6ebf2;border-radius:12px}
+table{width:100%;border-collapse:collapse;min-width:850px}
+th,td{text-align:left;padding:14px;border-bottom:1px solid #edf0f5;font-size:13px;color:#43516a}
+th{background:#f8f9fc;color:#77849a;font-size:10px;letter-spacing:.8px}
+td strong,td small{display:block}
+td small{color:#8691a3;margin-top:4px;font-size:11px}
+.empty,.notice{padding:24px;text-align:center;color:#77849a}
+.error{padding:10px;color:#b42318;background:#fff0ee;border-radius:8px}
+.success{padding:10px;color:#08734f;background:#eaf8f1;border-radius:8px}

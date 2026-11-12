@@ -1,0 +1,4 @@
+:host{display:block}
+.workspace{display:flex;min-height:calc(100vh - 68px)}
+.content{padding:34px;flex:1;min-width:0}
+@media(max-width:680px){.workspace{display:block}.content{padding:18px}}

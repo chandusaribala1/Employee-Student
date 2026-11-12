@@ -1,0 +1,222 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Admin User",
+      "email": "admin@gmail.com",
+      "password": "Admin123",
+      "role": "ADMIN"
+    },
+    {
+      "id": "2",
+      "name": "Chandana",
+      "email": "chandana@gmail.com",
+      "password": "Employee123",
+      "role": "EMPLOYEE",
+      "profileId": 101,
+      "designation": "Developer"
+    },
+    {
+      "id": "3",
+      "name": "Priya",
+      "email": "priya@gmail.com",
+      "password": "Student123",
+      "role": "STUDENT",
+      "profileId": 301,
+      "course": "Computer Science"
+    },
+    {
+      "id": "4",
+      "name": "Ravi Kumar",
+      "email": "ravi.kumar@gmail.com",
+      "password": "Student123",
+      "role": "STUDENT",
+      "profileId": 302,
+      "course": "Business Administration"
+    },
+    {
+      "name": "chandana",
+      "email": "saribalachandanareddy@gmail.com",
+      "password": "chandana",
+      "role": "ADMIN",
+      "id": "EAhX0sSBe7Q"
+    },
+    {
+      "name": "reethu",
+      "email": "reethu@gmail.com",
+      "password": "reethu",
+      "role": "STUDENT",
+      "profileId": 305,
+      "course": "Software Development",
+      "id": "cMWT1bhSb0I"
+    },
+    {
+      "name": "Reethu",
+      "email": "saribalachandanareddy0104@gmail.com",
+      "password": "Reethu",
+      "role": "EMPLOYEE",
+      "profileId": 104,
+      "designation": "Developer",
+      "id": "dYo2dhQOomY"
+    },
+    {
+      "name": "reethu1",
+      "email": "reethu1@gmail.com",
+      "password": "reethu",
+      "role": "EMPLOYEE",
+      "designation": "Project Manager",
+      "profileId": 105,
+      "id": "ZXWn_4xzbbw"
+    },
+    {
+      "name": "SR",
+      "email": "sr@gmail.com",
+      "password": "sr@gmail.com",
+      "role": "STUDENT",
+      "course": "Software Development",
+      "profileId": 307,
+      "id": "xAY3IyRhcoo"
+    }
+  ],
+  "employees": [
+    {
+      "name": "Chandana",
+      "email": "chandana@gmail.com",
+      "department": "IT",
+      "designation": "Developer",
+      "salary": 30000,
+      "id": "101"
+    },
+    {
+      "id": "102",
+      "name": "Arjun Mehta",
+      "email": "arjun.mehta@gmail.com",
+      "department": "Finance",
+      "designation": "Accountant",
+      "salary": 42000
+    },
+    {
+      "id": "103",
+      "name": "Nisha Rao",
+      "email": "nisha.rao@gmail.com",
+      "department": "HR",
+      "designation": "HR Executive",
+      "salary": 36000
+    },
+    {
+      "id": "104",
+      "name": "Reethu",
+      "email": "saribalachandanareddy0104@gmail.com",
+      "department": "IT",
+      "designation": "Developer",
+      "salary": 0
+    },
+    {
+      "name": "reethu1",
+      "email": "reethu1@gmail.com",
+      "department": "General",
+      "designation": "Project Manager",
+      "salary": 0,
+      "id": "105"
+    }
+  ],
+  "students": [
+    {
+      "name": "Priya",
+      "email": "priya@gmail.com",
+      "course": "Computer Science",
+      "year": 2,
+      "phone": "9876543210",
+      "address": "Pune, India",
+      "skills": [
+        "Java",
+        "SQL"
+      ],
+      "employeeId": "104",
+      "id": "301"
+    },
+    {
+      "id": "302",
+      "name": "Ravi Kumar",
+      "email": "ravi.kumar@gmail.com",
+      "course": "Business Administration",
+      "year": 2,
+      "phone": "9876501234",
+      "address": "Mumbai, India",
+      "skills": [
+        "Accounting",
+        "Communication"
+      ],
+      "employeeId": 102
+    },
+    {
+      "id": "303",
+      "name": "Meera Shah",
+      "email": "meera.shah@gmail.com",
+      "course": "Computer Science",
+      "year": 1,
+      "phone": "9812345670",
+      "address": "Hyderabad, India",
+      "skills": [
+        "Python",
+        "Problem solving"
+      ],
+      "employeeId": 101
+    },
+    {
+      "id": "304",
+      "name": "Kabir Singh",
+      "email": "kabir.singh@gmail.com",
+      "course": "Data Science",
+      "year": 4,
+      "phone": "9898765432",
+      "address": "Bengaluru, India",
+      "skills": [
+        "Python",
+        "Statistics"
+      ],
+      "employeeId": 101
+    },
+    {
+      "name": "reethu",
+      "email": "reethu@gmail.com",
+      "course": "Software Development",
+      "year": 1,
+      "phone": "7894563201",
+      "address": "fgrthybgvfdafrgthbfvdfthgbv",
+      "skills": [
+        "Java.serg",
+        "wedrfghjn",
+        "wertgh"
+      ],
+      "employeeId": "104",
+      "id": "305"
+    },
+    {
+      "name": "SR",
+      "email": "sr@gmail.com",
+      "phone": "7896541230",
+      "address": "xcvghuijokp;lkjmhbv",
+      "course": "Business Administration",
+      "year": 1,
+      "skills": [],
+      "employeeId": 105,
+      "id": "306"
+    },
+    {
+      "name": "SR",
+      "email": "sr@gmail.com",
+      "course": "Software Development",
+      "year": 1,
+      "phone": "7896541230",
+      "address": "xcvghjkl;,mnb",
+      "skills": [
+        "fghjkl",
+        "dfguikjhbv"
+      ],
+      "employeeId": "104",
+      "id": "307"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

@@ -1,59 +1,81 @@
-# Emp1
+# Northstar Management
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.6.
+An Angular management portal with admin, employee, and student workspaces. The app uses a local JSON Server API for demo data.
 
-## Development server
+## Run locally
 
-To start a local development server, run:
-
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Install dependencies once:
 
 ```bash
-ng generate component component-name
+npm install
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Start the API and Angular app in separate terminals:
 
 ```bash
-ng generate --help
+npm run server
 ```
-
-## Building
-
-To build the project run:
 
 ```bash
-ng build
+npm start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Open `http://localhost:4200/`. JSON Server runs at `http://localhost:3000/`.
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Build
 
 ```bash
-ng test
+npm run build
 ```
 
-## Running end-to-end tests
+## Demo accounts
 
-For end-to-end (e2e) testing, run:
+| Role | Name | Password |
+| --- | --- | --- |
+| Admin | Admin User | Admin123 |
+| Employee | Chandana | Employee123 |
+| Student | Priya | Student123 |
+
+The admin dashboard shows employee and student previews. Use the name search and the department/course selectors to filter those records. The full employee and student lists have their own search and filters; their selected department or course is also kept in the URL query string.
+
+Registration asks students for a course and employees for a designation, then creates and links the corresponding profile record. Adding a student asks for only name, course, year, and assigned employee. Admins choose the employee; an employee-created student is automatically assigned to that employee. New employee and student profile IDs are numeric and increment from the current records. Students can edit their own phone number (digits only), address, and skills in their profile. An employee sees assigned students whose course matches the employee's designation; student profiles show the assigned employee, personal information, academic details, and skills.
+
+## Project map
+
+- `src/app/app.ts` and `app.html` are the root component. The existing root `RouterOutlet` is kept; routed application shells render there.
+- `app.routes.ts` defines login, registration, the three role shells, lazy employee/student routes, resolver-backed profile routes, and the final not-found route. `app.config.ts` provides HttpClient, Router, and `PreloadAllModules`.
+- `core/services` contains the authentication, employee, and student API services. Each HttpClient call returns an Observable; a request runs when the component subscribes. Components set loading state in `next`/`error` handlers.
+- `core/guards` contains functional authentication and role guards. `core/resolvers` fetches profile records before their views render and prevents a student from requesting another student’s ID.
+- `layout` contains separate admin, employee, and student shells, each with the shared header/sidebar and its own nested `RouterOutlet`.
+- `features` contains the login/register pages, dashboards, and employee/student list, profile, and form components. The list pages apply search and filters to service-loaded data.
+- `shared` contains the role-aware header/sidebar and the reusable action-buttons child. The parent passes its record ID with `@Input()` and handles the child’s `@Output()` events; the child makes no API calls.
+- `models` defines the user, employee, and student data shapes. `db.json` provides demo data for JSON Server.
+
+The employee service demonstrates GET, POST, PUT, and DELETE at `/employees`; the student service does the same at `/students`. Student records hold an `employeeId`, so one employee can have many students. Authentication reads `/users` for login and duplicate-email checks and POSTs registrations to `/users` with each account's profile ID.
+
+## Security limits
+
+This project uses demo authentication. JSON Server exposes all records, passwords in `db.json` are plaintext, and Angular route guards can be bypassed by changing browser state or calling the API directly. In a real application, a backend must hash passwords, control account/role creation, authenticate each request, authorize every operation, and restrict student profile data on the server. The browser-side student ID check is a learning example, not production access control.
+
+## Tests
+
+Run the tests:
 
 ```bash
-ng e2e
+npm test
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+If Vitest workers exceed available memory in Windows PowerShell, limit them and disable watch mode:
 
-## Additional Resources
+```powershell
+$env:GOMAXPROCS = '2'
+$env:VITEST_MAX_FORKS = '1'
+npm test -- --watch=false
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Console messages
+
+- **`NG0908: In this configuration Angular requires Zone.js`** means Zone.js was not loaded at startup. This project includes the `zone.js` dependency in the build polyfills in `angular.json`. The test target uses that development build. After pulling this fix, run `npm install` and restart `npm start`.
+- **`Permissions policy violation: unload is not allowed`** and **`[pdf-viewer-detect] ... final: false`** do not appear to come from this app: its source has no unload handler or PDF viewer integration. They are commonly emitted by the browser or its host environment. If they remain in a regular browser tab, check with extensions disabled; they do not indicate that Angular failed to load.
+
+For more on Angular's Zone.js setup, see the [Angular zoneless guide](https://angular.dev/guide/zoneless).

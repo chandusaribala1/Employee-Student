@@ -1,0 +1,14 @@
+<nav class="side-nav">
+  <p class="nav-label">WORKSPACE</p>
+  @if (auth.currentUser()?.role === 'ADMIN') {
+    <a routerLink="/admin/dashboard" routerLinkActive="active">▦ <span>Dashboard</span></a>
+    <a routerLink="/admin/employees/list" routerLinkActive="active">♙ <span>Employees</span></a>
+    <a routerLink="/admin/students/list" routerLinkActive="active">♧ <span>Students</span></a>
+  } @else if (auth.currentUser()?.role === 'EMPLOYEE') {
+    <a routerLink="/employee/dashboard" routerLinkActive="active">▦ <span>Dashboard</span></a>
+    <a routerLink="/employee/students/list" routerLinkActive="active">♧ <span>Students</span></a>
+  } @else if (auth.currentUser()?.role === 'STUDENT') {
+    <a routerLink="/student/dashboard" routerLinkActive="active">▦ <span>Dashboard</span></a>
+    <a [routerLink]="['/student/profile', auth.currentUser()?.profileId]" routerLinkActive="active">♙ <span>My Profile</span></a>
+  }
+</nav>

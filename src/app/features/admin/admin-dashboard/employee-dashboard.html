@@ -1,0 +1,24 @@
+
+    <p class="eyebrow">EMPLOYEE WORKSPACE</p>
+    <h1>Hello, {{employee?.name ?? auth.currentUser()?.name}}</h1>
+    <p class="muted">{{employee?.designation ?? 'Employee'}} · Your assigned students and related courses.</p>
+    <section class="panel">
+      <div class="panel-heading"><div><h2>My students</h2><p>Only students assigned to you in a related course are shown.</p></div>
+        <a routerLink="/employee/students/list">Open directory →</a></div>
+      <div class="filters">
+        <input aria-label="Search my students by name" placeholder="Search by name" [value]="search" (input)="search=$any($event.target).value">
+        <select aria-label="Filter my students by course" [value]="courseFilter" (change)="courseFilter=$any($event.target).value">
+          <option value="">All related courses</option>@for(course of courses;track course){<option [value]="course">{{course}}</option>}
+        </select>
+      </div>
+      @if(loading){<p class="state" role="status">Loading your assigned students…</p>}
+      @else if(error){<p class="state error" role="alert">{{error}}</p>}
+      @else {
+        <div class="table-wrap"><table><thead><tr><th>Student</th><th>Course</th><th>Year</th><th></th></tr></thead><tbody>
+          @for(student of students | filterBy: search : 'name' : 'course' : courseFilter;track student.id){<tr><td><strong>{{student.name}}</strong><small>{{student.email}}</small></td><td>{{student.course}}</td><td>{{student.year}}</td><td><a [routerLink]="['/employee/students/view',student.id]">View profile</a></td></tr>}
+          @empty{<tr><td class="empty" colspan="4">No assigned students match these filters.</td></tr>}
+        </tbody></table></div>
+        @let filteredStudents = students | filterBy: search : 'name' : 'course' : courseFilter;
+        <p class="count">Showing {{filteredStudents.length}} of {{students.length}} assigned students</p>
+      }
+    </section>
